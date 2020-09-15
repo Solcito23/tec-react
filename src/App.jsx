@@ -1,7 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import Header from "./Components/Header";
 import CreateItems from "./Views/CreateItems";
+import CreateBundle from "./Views/CreateBundle";
+import ReleasedBundle from "./Views/ReleasedBundle";
 import { Container } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -91,14 +94,26 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Container style={{ marginTop: "80px" }}>
-          <CreateItems
-            items={items}
-            onItemAdd={this.addItem}
-            onItemDelete={this.deleteItem}
-            onSubItemDelete={this.deleteSubItem}
-          ></CreateItems>
-        </Container>
+        <Router>
+          <Container style={{ marginTop: "80px" }}>
+            <Switch>
+              <Route path="/ReleasedBundle">
+                <ReleasedBundle />
+              </Route>
+              <Route path="/CreateBundle">
+                <CreateBundle />
+              </Route>
+              <Route path="/">
+                <CreateItems
+                  items={items}
+                  onItemAdd={this.addItem}
+                  onItemDelete={this.deleteItem}
+                  onSubItemDelete={this.deleteSubItem}
+                ></CreateItems>
+              </Route>
+            </Switch>
+          </Container>
+        </Router>
       </div>
     );
   }

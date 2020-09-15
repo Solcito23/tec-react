@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Link } from "@material-ui/core";
-
+import { AppBar, Toolbar, Link, Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     background: "#000",
@@ -9,15 +8,19 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
   },
   liNavBar: {
-    lineHeight: "4",
     padding: "0px 16px",
     color: "white",
   },
-  "&:hover": {
-    background: "#2979ff",
-    bcolor: "white",
+  myTextStyle: {
+    textDecoration: "none",
+    "&:hover": {
+      background: "#2979ff",
+      bcolor: "white",
+    },
   },
   liNavBarActive: {
+    padding: "0px 16px",
+    color: "white",
     background: "#2979ff",
   },
   offset: "80px",
@@ -30,32 +33,44 @@ export default function Header() {
       <AppBar classes={{ root: classes.appBar }}>
         <Toolbar>
           <Link
-            classes={{ root: classes.liNavBar }}
+            href="/"
             underline="none"
-            onClick={() => {
-              alert("Create Items");
-            }}
+            classes={
+              window.location.pathname === "/"
+                ? { root: classes.liNavBarActive }
+                : { root: classes.liNavBar }
+            }
           >
-            Create Items
+            <Typography variant="h6" noWrap className={classes.myTextStyle}>
+              Create Items
+            </Typography>
           </Link>
 
           <Link
-            classes={{ root: classes.liNavBar }}
+            href="/CreateBundle"
             underline="none"
-            onClick={() => {
-              alert("Create Bundle");
-            }}
+            classes={
+              window.location.pathname === "/CreateBundle"
+                ? { root: classes.liNavBarActive }
+                : { root: classes.liNavBar }
+            }
           >
-            Create Bundle
+            <Typography variant="h6" noWrap className={classes.myTextStyle}>
+              Create Bundle
+            </Typography>
           </Link>
           <Link
-            classes={{ root: classes.liNavBar }}
+            href="/ReleasedBundle"
+            classes={
+              window.location.pathname === "/ReleasedBundle"
+                ? { root: classes.liNavBarActive }
+                : { root: classes.liNavBar }
+            }
             underline="none"
-            onClick={() => {
-              alert("Released Bundles");
-            }}
           >
-            Released Bundles
+            <Typography variant="h6" noWrap className={classes.myTextStyle}>
+              Released Bundles
+            </Typography>
           </Link>
         </Toolbar>
       </AppBar>
