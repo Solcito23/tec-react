@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  TextField,
   FormControl,
   Box,
   FormControlLabel,
@@ -13,7 +12,8 @@ import {
   Grid,
 } from "@material-ui/core";
 import CurrencyInput from "react-currency-input";
-import BootstrapInput from "./BootstrapInput";
+import BootstrapInput from "../Commons/BootstrapInput";
+import { useData } from "../../Context/DataContext";
 
 const useStyles = makeStyles((theme) => ({
   inputCustom: {
@@ -35,6 +35,7 @@ const FormCreateItem = (props) => {
 
   const [type, setType] = useState("type-single");
 
+  const { addItem } = useData();
   const [fieldRequeried, setError] = useState({
     codeError: false,
     descriptionError: false,
@@ -42,11 +43,6 @@ const FormCreateItem = (props) => {
 
   const handleChange = (prop) => (event) => {
     setItem({ ...item, [prop]: event.target.value });
-  };
-
-  const handleFinancial = (x) => {
-    var newValue = Number.parseFloat(x).toFixed(2);
-    setItem({ ...item, ["price"]: newValue });
   };
 
   const handleChangeType = (event) => {
@@ -59,7 +55,7 @@ const FormCreateItem = (props) => {
 
     //VALIDATION EMPTY
     if (validationForm()) {
-      props.onItemAdd(item);
+      addItem(item);
       setItem({
         code: "",
         description: "",
@@ -92,7 +88,7 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Code:</FormLabel>
         </Grid>
-        <Grid item sm={8}>
+        <Grid item sm={10}>
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="code-item"
@@ -112,7 +108,7 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Description:</FormLabel>
         </Grid>
-        <Grid item sm={8}>
+        <Grid item sm={10}>
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="description-item"
@@ -148,7 +144,7 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Type:</FormLabel>
         </Grid>
-        <Grid item sm={8}>
+        <Grid item sm={10}>
           <FormGroup row style={{ margin: 8 }}>
             <RadioGroup
               row
@@ -178,7 +174,7 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Order:</FormLabel>
         </Grid>
-        <Grid item sm={8}>
+        <Grid item sm={10}>
           <FormControl margen="normal">
             <BootstrapInput
               id="order-item"

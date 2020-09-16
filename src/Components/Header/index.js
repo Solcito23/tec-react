@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Link, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     background: "#000",
@@ -10,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   liNavBar: {
     padding: "0px 16px",
     color: "white",
+    textDecoration: "none",
   },
   myTextStyle: {
     textDecoration: "none",
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0px 16px",
     color: "white",
     background: "#2979ff",
+    textDecoration: "none",
   },
   offset: "80px",
 }));
@@ -33,12 +36,11 @@ export default function Header() {
       <AppBar classes={{ root: classes.appBar }}>
         <Toolbar>
           <Link
-            href="/"
-            underline="none"
-            classes={
+            to={"/"}
+            className={
               window.location.pathname === "/"
-                ? { root: classes.liNavBarActive }
-                : { root: classes.liNavBar }
+                ? classes.liNavBarActive
+                : classes.liNavBar
             }
           >
             <Typography variant="h6" noWrap className={classes.myTextStyle}>
@@ -47,12 +49,11 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/CreateBundle"
-            underline="none"
-            classes={
+            to={"/CreateBundle"}
+            className={
               window.location.pathname === "/CreateBundle"
-                ? { root: classes.liNavBarActive }
-                : { root: classes.liNavBar }
+                ? classes.liNavBarActive
+                : classes.liNavBar
             }
           >
             <Typography variant="h6" noWrap className={classes.myTextStyle}>
@@ -60,13 +61,12 @@ export default function Header() {
             </Typography>
           </Link>
           <Link
-            href="/ReleasedBundle"
-            classes={
+            to={"/ReleasedBundle"}
+            className={
               window.location.pathname === "/ReleasedBundle"
-                ? { root: classes.liNavBarActive }
-                : { root: classes.liNavBar }
+                ? classes.liNavBarActive
+                : classes.liNavBar
             }
-            underline="none"
           >
             <Typography variant="h6" noWrap className={classes.myTextStyle}>
               Released Bundles
