@@ -15,7 +15,8 @@ const Bundle = (props) => {
             <BootstrapInput
               id="name-bundle"
               style={{ margin: 8 }}
-              value={bundle.name}
+              value={bundle.nameBundle}
+              onChange={props.handleChangeName("nameBundle")}
               inputProps={{
                 maxLength: 14,
               }}

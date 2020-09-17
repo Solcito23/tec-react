@@ -32,6 +32,8 @@ const Item = (props) => {
     props.onDeleteToBundle(code);
   };
 
+  const { item } = props;
+
   const renderSubItems = (item) => {
     return (
       <Card variant="outlined" key={item.code}>
@@ -65,71 +67,99 @@ const Item = (props) => {
           <Typography variant="body1" color="textSecondary" gutterBottom>
             {item.type}
           </Typography>
-          {item.type === "Multiple" && props.action === "addBundle"
-            ? renderMultiplePrice(item, "subItem")
+          {item.type === "Multiple"
+            ? renderMultiplePrice(item, "subItem", props.action)
             : ""}
         </CardContent>
       </Card>
     );
   };
 
-  const renderMultiplePrice = (item, typeItem) => {
-    return (
-      <Grid container>
-        <Grid item sm={3}>
-          <FormControl fullWidth margen="normal">
-            <BootstrapInput
-              id="multiple-item"
-              type="number"
-              style={{ margin: 8 }}
-              value={item.totalItem}
-              onChange={props.handleChangeTotal(item.code, typeItem)}
-              inputProps={{
-                min: 1,
-              }}
-            ></BootstrapInput>
-          </FormControl>
-        </Grid>
-        <Grid item sm={2}>
-          <Typography variant="body1" color="textSecondary">
-            ${item.price * item.totalItem}
+  const renderButton = (action, item) => {
+    switch (action) {
+      case "createItem":
+        return (
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleClick(item.code)}
+          >
+            Delete
+          </Button>
+        );
+      case "addBundle":
+        return (
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleClickDeleteToBundle(item.code)}
+          >
+            Delete
+          </Button>
+        );
+      case "createBundle":
+        return (
+          <Button
+            color="default"
+            variant="outlined"
+            onClick={handleClickAddBundle(item)}
+          >
+            Add to Bundle
+          </Button>
+        );
+      case "releasedBundles":
+        return (
+          <Typography variant="h5" color="textSecondary">
+            ${props.bundle.total}
           </Typography>
-        </Grid>
-      </Grid>
-    );
+        );
+      default:
+        return null;
+    }
   };
 
-  const { item } = props;
+  const renderMultiplePrice = (item, typeItem, action) => {
+    switch (action) {
+      case "addBundle":
+        return (
+          <Grid container>
+            <Grid item sm={3}>
+              <FormControl fullWidth margen="normal">
+                <BootstrapInput
+                  id="multiple-item"
+                  type="number"
+                  style={{ margin: 8 }}
+                  value={item.totalItem}
+                  onChange={props.handleChangeTotal(item.code, typeItem)}
+                  inputProps={{
+                    min: 1,
+                  }}
+                ></BootstrapInput>
+              </FormControl>
+            </Grid>
+            <Grid item sm={2}>
+              <Typography variant="body1" color="textSecondary">
+                ${item.price * item.totalItem}
+              </Typography>
+            </Grid>
+          </Grid>
+        );
+      case "releasedBundles":
+        return (
+          <Typography variant="body1" color="textSecondary">
+            ${item.price * item.totalItem} (x {item.totalItem})
+          </Typography>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <CardHeader
-        action={
-          props.action === "createItem" ? (
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={handleClick(item.code)}
-            >
-              Delete
-            </Button>
-          ) : props.action === "addBundle" ? (
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={handleClickDeleteToBundle(item.code)}
-            >
-              Delete
-            </Button>
-          ) : (
-            <Button
-              color="default"
-              variant="outlined"
-              onClick={handleClickAddBundle(item)}
-            >
-              Add to Bundle
-            </Button>
-          )
-        }
+        action={renderButton(props.action, item)}
         title={
           <Typography style={{ fontSize: "14px" }} color="textSecondary">
             {item.code}
@@ -147,8 +177,8 @@ const Item = (props) => {
         <Typography variant="body1" color="textSecondary">
           {item.type}
         </Typography>
-        {item.type === "Multiple" && props.action === "addBundle"
-          ? renderMultiplePrice(item, "item")
+        {item.type === "Multiple"
+          ? renderMultiplePrice(item, "item", props.action)
           : ""}
 
         {props.item.subItems.length > 0 && (

@@ -7,13 +7,14 @@ import { useData } from "../../Context/DataContext";
 
 const CreateBundle = (props) => {
   const { acceptBundle } = useData();
+
   const [bundle, setBundle] = useState({
-    name: "",
+    nameBundle: "",
     total: 0.0,
     items: [],
   });
 
-  const addItemToBundle = (item) => {
+  const handleAddItemToBundle = (item) => {
     let listItems = bundle.items;
     let priceTotal = 0;
     item.totalItem = 1;
@@ -24,23 +25,47 @@ const CreateBundle = (props) => {
 
     listItems.push(item);
     priceTotal = calculateTotal(listItems);
-    setBundle({ items: listItems, total: priceTotal });
+
+    setBundle({
+      ...bundle,
+      items: listItems,
+    });
+    setBundle({
+      ...bundle,
+      total: priceTotal,
+    });
   };
 
-  const deleteToBundle = (code) => {
+  const handleDeleteToBundle = (code) => {
     let listItem = bundle.items;
     let itemIndex = listItem.findIndex((x) => x.code === code);
     listItem.splice(itemIndex, 1);
     let totalPrice = calculateTotal(listItem);
-    setBundle({ items: listItem, total: totalPrice });
+
+    setBundle({
+      ...bundle,
+      items: listItem,
+    });
+    setBundle({
+      ...bundle,
+      total: totalPrice,
+    });
+  };
+
+  const handleChangeName = (prop) => (event) => {
+    setBundle({
+      ...bundle,
+      [prop]: event.target.value,
+    });
   };
 
   const handleAcceptBundle = () => {
     acceptBundle(bundle);
     setBundle({
+      ...bundle,
       name: "",
-      total: 0.0,
       items: [],
+      total: 0.0,
     });
   };
 
@@ -67,7 +92,15 @@ const CreateBundle = (props) => {
         break;
     }
     let priceTotal = calculateTotal(listItems);
-    setBundle({ items: listItems, total: priceTotal });
+
+    setBundle({
+      ...bundle,
+      items: listItems,
+    });
+    setBundle({
+      ...bundle,
+      total: priceTotal,
+    });
   };
 
   const calculateTotal = (listItems) => {
@@ -89,7 +122,7 @@ const CreateBundle = (props) => {
         <Grid item xs={7} md={7} lg={7}>
           <Typography variant="h5">Available Items</Typography>
           <ItemsList
-            onAddItemToBundle={addItemToBundle}
+            onAddItemToBundle={handleAddItemToBundle}
             action="createBundle"
           ></ItemsList>
         </Grid>
@@ -105,9 +138,10 @@ const CreateBundle = (props) => {
           ) : (
             <div>
               <Bundle
-                onDeleteToBundle={deleteToBundle}
+                onDeleteToBundle={handleDeleteToBundle}
                 bundle={bundle}
                 handleChangeTotal={handleChangeTotal}
+                handleChangeName={handleChangeName}
               ></Bundle>
               <Typography variant="h6">${bundle.total}</Typography>
               <Box>

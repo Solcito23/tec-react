@@ -82,18 +82,16 @@ export function DataProvider(props) {
     listBundles.push(bundle);
 
     setBundles(listBundles);
+
+    console.log("bundles : ", bundles);
   };
 
-  // const value = React.useMemo(() => {
-  //   return {
-  //     items,
-  //     bundles,
-  //     addItem,
-  //     deleteItem,
-  //     deleteSubItem,
-  //     acceptBundle,
-  //   };
-  // });
+  const deleteBundle = (idx) => {
+    let listBundles = [...bundles];
+    listBundles.splice(idx, 1);
+    setBundles(listBundles);
+  };
+
   const value = {
     items,
     bundles,
@@ -101,6 +99,7 @@ export function DataProvider(props) {
     deleteItem,
     deleteSubItem,
     acceptBundle,
+    deleteBundle,
   };
 
   return <DataContext.Provider value={value} {...props} />;

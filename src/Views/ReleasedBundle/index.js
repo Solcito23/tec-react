@@ -1,8 +1,10 @@
 import React from "react";
+import BundleList from "../../Components/BundleList";
+
 function ReleasedBundle() {
   return (
     <div>
-      <h1>ReleasedBundle Page</h1>
+      <BundleList />
     </div>
   );
 }
