@@ -52,7 +52,7 @@ const FormCreateItem = (props) => {
   const [item, setItem] = useState({
     code: "",
     description: "",
-    price: "0.00",
+    price: 0,
     type: "",
     order: 0,
   });
@@ -74,13 +74,12 @@ const FormCreateItem = (props) => {
   const handleClick = () => {
     item.type = type === "type-single" ? "Simple" : "Multiple";
 
-    //EMPTY VALIDATION
     if (validationForm()) {
       addItem(item);
       setItem({
         code: "",
         description: "",
-        price: "0.00",
+        price: 0,
         type: "",
         order: 0,
       });

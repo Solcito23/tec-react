@@ -14,6 +14,8 @@ import BootstrapInput from "../Commons/BootstrapInput";
 
 const Item = (props) => {
   const { item } = props;
+  const options = { style: "currency", currency: "USD" };
+  const twoDecimalFormat = new Intl.NumberFormat("en-US", options);
   const handleClick = (code) => (event) => {
     event.preventDefault();
     props.onItemDelete(code);
@@ -62,7 +64,7 @@ const Item = (props) => {
             {item.description}
           </Typography>
           <Typography variant="body1" color="textSecondary">
-            ${item.price}
+            {twoDecimalFormat.format(item.price)}
           </Typography>
           <Typography variant="body1" color="textSecondary" gutterBottom>
             {item.type}
@@ -110,7 +112,7 @@ const Item = (props) => {
       case "releasedBundles":
         return (
           <Typography variant="h5" color="textSecondary">
-            ${props.bundle.total}
+            {twoDecimalFormat.format(props.bundle.total)}
           </Typography>
         );
       default:
@@ -139,7 +141,7 @@ const Item = (props) => {
             </Grid>
             <Grid item sm={2}>
               <Typography variant="body1" color="textSecondary">
-                ${item.price * item.totalItem}
+                {twoDecimalFormat.format(item.price * item.totalItem)}
               </Typography>
             </Grid>
           </Grid>
@@ -147,7 +149,7 @@ const Item = (props) => {
       case "releasedBundles":
         return (
           <Typography variant="body1" color="textSecondary">
-            ${item.price * item.totalItem}
+            {twoDecimalFormat.format(item.price * item.totalItem)}
             (x {item.totalItem})
           </Typography>
         );
@@ -173,7 +175,7 @@ const Item = (props) => {
           {item.description}
         </Typography>
         <Typography variant="body1" color="textSecondary">
-          ${item.price}
+          {twoDecimalFormat.format(item.price)}
         </Typography>
         <Typography variant="body1" color="textSecondary">
           {item.type}

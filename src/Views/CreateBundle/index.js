@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
 const CreateBundle = (props) => {
   const { acceptBundle } = useData();
   const classes = useStyles();
+  const options = { style: "currency", currency: "USD" };
+  const twoDecimalFormat = new Intl.NumberFormat("en-US", options);
   const [bundle, setBundle] = useState({
     nameBundle: "",
     total: "0.00",
@@ -120,7 +122,6 @@ const CreateBundle = (props) => {
 
   const calculateTotal = (listItems) => {
     let priceTotal = 0;
-    console.log(listItems);
     listItems.map((item) => {
       priceTotal += item.price * item.totalItem;
       item.subItems.map((subItem) => {
@@ -157,7 +158,9 @@ const CreateBundle = (props) => {
                 handleChangeTotal={handleChangeTotal}
                 handleChangeName={handleChangeName}
               ></Bundle>
-              <Typography variant="h6">${bundle.total}</Typography>
+              <Typography variant="h6">
+                {twoDecimalFormat.format(bundle.total)}
+              </Typography>
               <Box>
                 <Button
                   color="primary"

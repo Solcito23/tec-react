@@ -39,12 +39,12 @@ export function DataProvider(props) {
     let listItems = [...items];
     let itemExist = listItems.find((x) => x.code === code);
     if (itemExist) {
-      //CREATE SUBITEM
       let itemIndex = listItems.findIndex((x) => x.code === itemExist.code);
+      item.price = priceFormatter(item.price);
       itemExist.subItems.push(item);
       listItems[itemIndex] = itemExist;
     } else {
-      //CREATE ITEM
+      item.price = priceFormatter(item.price);
       item.subItems = [];
       listItems.push(item);
     }
@@ -82,14 +82,18 @@ export function DataProvider(props) {
     listBundles.push(bundle);
 
     setBundles(listBundles);
-
-    console.log("bundles : ", bundles);
   };
 
   const deleteBundle = (idx) => {
     let listBundles = [...bundles];
     listBundles.splice(idx, 1);
     setBundles(listBundles);
+  };
+
+  const priceFormatter = (price) => {
+    let value = price.toString().replace(",", "");
+    value = parseFloat(value);
+    return value;
   };
 
   const value = {
