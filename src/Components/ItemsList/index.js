@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import Alert from "@material-ui/lab/Alert";
+import Message from "../Commons/Message";
 import Item from "../Item";
 import { useData } from "../../Context/DataContext";
 
@@ -10,9 +10,7 @@ function ItemsList(props) {
     <div>
       {items.length === 0 && (
         <div>
-          <Alert icon={false} severity="info">
-            Create new items to view them here :)
-          </Alert>
+          <Message message={"Create new items to view them here :)"} />
         </div>
       )}
       {items.map((item) => (

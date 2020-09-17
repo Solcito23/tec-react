@@ -5,7 +5,7 @@ import ItemsList from "../../Components/ItemsList";
 
 const CreateItems = (props) => {
   return (
-    <div className="white">
+    <div>
       <Grid container spacing={8}>
         <Grid item xs={6} md={6} lg={6}>
           <FormCreateItem></FormCreateItem>

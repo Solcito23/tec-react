@@ -42,7 +42,7 @@ export default function Header() {
             to={"/"}
             className={location === "/" ? "liNavBarActive" : ""}
           >
-            <Typography variant="h6" noWrap>
+            <Typography variant="subtitle1" noWrap>
               Create Items
             </Typography>
           </Link>
@@ -51,7 +51,7 @@ export default function Header() {
             to={"/CreateBundle"}
             className={location === "/CreateBundle" ? "liNavBarActive" : ""}
           >
-            <Typography variant="h6" noWrap>
+            <Typography variant="subtitle1" noWrap>
               Create Bundle
             </Typography>
           </Link>
@@ -59,7 +59,7 @@ export default function Header() {
             to={"/ReleasedBundle"}
             className={location === "/ReleasedBundle" ? "liNavBarActive" : ""}
           >
-            <Typography variant="h6" noWrap>
+            <Typography variant="subtitle1" noWrap>
               Released Bundles
             </Typography>
           </Link>

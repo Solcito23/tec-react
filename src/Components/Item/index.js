@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles } from "@material-ui/styles";
 import {
   CardContent,
   Typography,
@@ -12,6 +13,7 @@ import {
 import BootstrapInput from "../Commons/BootstrapInput";
 
 const Item = (props) => {
+  const { item } = props;
   const handleClick = (code) => (event) => {
     event.preventDefault();
     props.onItemDelete(code);
@@ -31,8 +33,6 @@ const Item = (props) => {
     event.preventDefault();
     props.onDeleteToBundle(code);
   };
-
-  const { item } = props;
 
   const renderSubItems = (item) => {
     return (
@@ -122,7 +122,7 @@ const Item = (props) => {
     switch (action) {
       case "addBundle":
         return (
-          <Grid container>
+          <Grid container style={{ alignItems: "center" }}>
             <Grid item sm={3}>
               <FormControl fullWidth margen="normal">
                 <BootstrapInput
@@ -147,7 +147,8 @@ const Item = (props) => {
       case "releasedBundles":
         return (
           <Typography variant="body1" color="textSecondary">
-            ${item.price * item.totalItem} (x {item.totalItem})
+            ${item.price * item.totalItem}
+            (x {item.totalItem})
           </Typography>
         );
 

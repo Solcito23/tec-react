@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FormControl,
-  Box,
   FormControlLabel,
   Radio,
   RadioGroup,
@@ -16,15 +15,40 @@ import BootstrapInput from "../Commons/BootstrapInput";
 import { useData } from "../../Context/DataContext";
 
 const useStyles = makeStyles((theme) => ({
-  inputCustom: {
-    border: "1px solid #ced4da",
+  priceInput: {
     borderRadius: 4,
-    fontSize: 14,
-    height: "30px",
+    position: "relative",
+    backgroundColor: theme.palette.common.white,
+    border: "1px solid #ced4da",
+    fontSize: 16,
+    padding: "10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    margin: "8px",
+    "&:focus": {
+      borderColor: theme.palette.primary.main,
+      boxShadow: "rgba(63, 81, 181, 0.25) 0 0 0 0.2rem",
+    },
+  },
+  containerForm: {
+    "& .MuiGrid-container": {
+      alignItems: "center",
+      "& label": {
+        fontSize: "14px",
+      },
+    },
+    "& .MuiRadio-colorPrimary.Mui-checked": {
+      color: "#2979ff",
+    },
+  },
+  btnCreateItem: {
+    margin: "8px",
+    background: "#2979ff",
   },
 }));
 
 const FormCreateItem = (props) => {
+  const { addItem } = useData();
+  const classes = useStyles();
   const [item, setItem] = useState({
     code: "",
     description: "",
@@ -32,10 +56,8 @@ const FormCreateItem = (props) => {
     type: "",
     order: 0,
   });
-
   const [type, setType] = useState("type-single");
 
-  const { addItem } = useData();
   const [fieldRequeried, setError] = useState({
     codeError: false,
     descriptionError: false,
@@ -49,11 +71,10 @@ const FormCreateItem = (props) => {
     setType(event.target.value);
   };
 
-  const handleClick = () => (event) => {
-    event.preventDefault();
+  const handleClick = () => {
     item.type = type === "type-single" ? "Simple" : "Multiple";
 
-    //VALIDATION EMPTY
+    //EMPTY VALIDATION
     if (validationForm()) {
       addItem(item);
       setItem({
@@ -80,10 +101,8 @@ const FormCreateItem = (props) => {
     return validateForm;
   };
 
-  const classes = useStyles();
-
   return (
-    <div>
+    <div className={classes.containerForm}>
       <Grid container>
         <Grid item sm={2} align="right">
           <FormLabel>Code:</FormLabel>
@@ -92,7 +111,6 @@ const FormCreateItem = (props) => {
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="code-item"
-              style={{ margin: 8 }}
               onChange={handleChange("code")}
               value={item.code}
               error={fieldRequeried.codeError}
@@ -112,7 +130,6 @@ const FormCreateItem = (props) => {
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="description-item"
-              style={{ margin: 8 }}
               onChange={handleChange("description")}
               error={fieldRequeried.descriptionError}
               value={item.description}
@@ -127,13 +144,13 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Price:</FormLabel>
         </Grid>
-        <Grid item sm={8}>
+        <Grid item sm={10}>
           <FormControl fullWidth margen="normal">
             <CurrencyInput
+              className={classes.priceInput}
               value={item.price}
               precision="2"
               prefix="$"
-              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
               onChangeEvent={handleChange("price")}
             />
           </FormControl>
@@ -174,13 +191,12 @@ const FormCreateItem = (props) => {
         <Grid item sm={2} align="right">
           <FormLabel>Order:</FormLabel>
         </Grid>
-        <Grid item sm={10}>
+        <Grid item sm={4}>
           <FormControl margen="normal">
             <BootstrapInput
               id="order-item"
               type="number"
               onChange={handleChange("order")}
-              style={{ margin: 8 }}
               value={item.order}
               inputProps={{
                 min: 0,
@@ -190,11 +206,19 @@ const FormCreateItem = (props) => {
         </Grid>
       </Grid>
 
-      <Box>
-        <Button color="primary" variant="contained" onClick={handleClick()}>
-          Create Item
-        </Button>
-      </Box>
+      <Grid container>
+        <Grid item sm={2}></Grid>
+        <Grid item align="right">
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.btnCreateItem}
+            onClick={() => handleClick()}
+          >
+            Create Item
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

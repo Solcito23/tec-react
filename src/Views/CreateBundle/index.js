@@ -1,16 +1,31 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/styles";
 import { Grid, Typography, Button, Box } from "@material-ui/core";
 import ItemsList from "../../Components/ItemsList";
 import Bundle from "../../Components/Bundle";
-import Alert from "@material-ui/lab/Alert";
+import Message from "../../Components/Commons/Message";
 import { useData } from "../../Context/DataContext";
+
+const useStyles = makeStyles((theme) => ({
+  containerForm: {
+    "& .MuiGrid-container#formCreateBundle": {
+      alignItems: "center",
+      "& label": {
+        fontSize: "14px",
+      },
+    },
+  },
+  btnCreateBundle: {
+    background: "#2979ff",
+  },
+}));
 
 const CreateBundle = (props) => {
   const { acceptBundle } = useData();
-
+  const classes = useStyles();
   const [bundle, setBundle] = useState({
     nameBundle: "",
-    total: 0.0,
+    total: "0.00",
     items: [],
   });
 
@@ -63,9 +78,9 @@ const CreateBundle = (props) => {
     acceptBundle(bundle);
     setBundle({
       ...bundle,
-      name: "",
+      nameBundle: "",
       items: [],
-      total: 0.0,
+      total: "0.00",
     });
   };
 
@@ -105,6 +120,7 @@ const CreateBundle = (props) => {
 
   const calculateTotal = (listItems) => {
     let priceTotal = 0;
+    console.log(listItems);
     listItems.map((item) => {
       priceTotal += item.price * item.totalItem;
       item.subItems.map((subItem) => {
@@ -113,11 +129,11 @@ const CreateBundle = (props) => {
       });
       return true;
     });
-    return priceTotal;
+    return priceTotal.toFixed(2);
   };
 
   return (
-    <div className="white">
+    <div className={classes.containerForm}>
       <Grid container spacing={8}>
         <Grid item xs={7} md={7} lg={7}>
           <Typography variant="h5">Available Items</Typography>
@@ -131,9 +147,7 @@ const CreateBundle = (props) => {
 
           {bundle.items.length === 0 ? (
             <div>
-              <Alert icon={false} severity="info">
-                Please, add items to new bundle :)
-              </Alert>
+              <Message message={"Try adding some items to a new Bundle :)"} />
             </div>
           ) : (
             <div>
@@ -148,6 +162,7 @@ const CreateBundle = (props) => {
                 <Button
                   color="primary"
                   variant="contained"
+                  className={classes.btnCreateBundle}
                   onClick={handleAcceptBundle}
                 >
                   Accept Bundle
