@@ -4,13 +4,13 @@ export const DELETE_BUNDLE = "DELETE_BUNDLE";
 export const add_bundle_action = (bundle) => (dispatch, state) => {
   return dispatch({
     type: ADD_BUNDLE,
-    payload: item,
+    payload: bundle,
   });
 };
 
-export const delete_bundle_action = (code) => (dispatch, state) => {
+export const delete_bundle_action = (idx) => (dispatch, state) => {
   return dispatch({
     type: DELETE_BUNDLE,
-    payload: "",
+    payload: idx,
   });
 };

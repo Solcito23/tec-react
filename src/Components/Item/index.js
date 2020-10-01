@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import {
   delete_item_action,
   delete_subItem_action,
-} from "../../Redux/Actions/itemsAction";
+} from "../../Redux/Actions/items.action";
 
 const Item = (props) => {
   const dispatch = useDispatch();

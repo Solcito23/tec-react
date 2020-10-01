@@ -4,7 +4,8 @@ import { Grid, Typography, Button, Box } from "@material-ui/core";
 import ItemsList from "../../Components/ItemsList";
 import Bundle from "../../Components/Bundle";
 import Message from "../../Components/Commons/Message";
-import { useData } from "../../Context/DataContext";
+import { useDispatch } from "react-redux";
+import { add_bundle_action } from "../../Redux/Actions/bundle.action";
 
 const useStyles = makeStyles((theme) => ({
   containerForm: {
@@ -21,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateBundle = (props) => {
-  //const { acceptBundle } = useData();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const options = { style: "currency", currency: "USD" };
   const twoDecimalFormat = new Intl.NumberFormat("en-US", options);
+
   const [bundle, setBundle] = useState({
     nameBundle: "",
     total: "0.00",
@@ -77,7 +79,7 @@ const CreateBundle = (props) => {
   };
 
   const handleAcceptBundle = () => {
-    //acceptBundle(bundle);
+    dispatch(add_bundle_action(bundle));
     setBundle({
       ...bundle,
       nameBundle: "",

@@ -11,6 +11,8 @@ import {
 import Item from "../Item";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import { useDispatch } from "react-redux";
+import { delete_bundle_action } from "../../Redux/Actions/bundle.action";
 
 const useStyles = makeStyles((theme) => ({
   containerBundle: {
@@ -29,6 +31,11 @@ const BundleItems = (props) => {
   const { bundle } = props;
   const classes = useStyles();
   const componentRef = useRef();
+  const dispatch = useDispatch();
+
+  const handleDeleteBundle = (idx) => (event) => {
+    dispatch(delete_bundle_action(idx));
+  };
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -49,7 +56,7 @@ const BundleItems = (props) => {
           <Button
             color="secondary"
             variant="contained"
-            onClick={props.handleDeleteBundle(props.idx)}
+            onClick={handleDeleteBundle(props.idx)}
           >
             Delete
           </Button>

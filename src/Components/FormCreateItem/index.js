@@ -13,7 +13,7 @@ import {
 import CurrencyInput from "react-currency-input";
 import BootstrapInput from "../Commons/BootstrapInput";
 import { useDispatch } from "react-redux";
-import { add_item_action } from "../../Redux/Actions/itemsAction";
+import { add_item_action } from "../../Redux/Actions/items.action";
 
 const useStyles = makeStyles((theme) => ({
   priceInput: {
@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormCreateItem = (props) => {
-  //const { addItem } = useData();
   const dispatch = useDispatch();
   const classes = useStyles();
   const [item, setItem] = useState({
@@ -77,7 +76,6 @@ const FormCreateItem = (props) => {
     item.type = type === "type-single" ? "Simple" : "Multiple";
 
     if (validationForm()) {
-      //addItem(item);
       dispatch(add_item_action(item));
       setItem({
         code: "",

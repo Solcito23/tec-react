@@ -6,7 +6,6 @@ import CreateBundle from "./Views/CreateBundle";
 import ReleasedBundle from "./Views/ReleasedBundle";
 import { Container } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-//import { DataProvider } from "./Context/DataContext";
 import store from "./Redux/store";
 
 import { Provider } from "react-redux";
@@ -27,7 +26,7 @@ export default () => (
 
 function App() {
   const classes = useStyles();
-  console.log(store.getState());
+
   return (
     <div>
       <Router>
