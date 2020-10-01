@@ -24,7 +24,7 @@ const default_items = [
       {
         code: "C0DE002-01",
         description: "This is the item description, allowing for free text",
-        price: 240,
+        price: 260,
         type: "Single",
         order: 1,
       },
