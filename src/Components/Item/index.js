@@ -10,19 +10,24 @@ import {
   Grid,
 } from "@material-ui/core";
 import BootstrapInput from "../Commons/BootstrapInput";
+import { useDispatch } from "react-redux";
+import {
+  delete_item_action,
+  delete_subItem_action,
+} from "../../Redux/Actions/itemsAction";
 
 const Item = (props) => {
+  const dispatch = useDispatch();
   const { item } = props;
   const options = { style: "currency", currency: "USD" };
   const twoDecimalFormat = new Intl.NumberFormat("en-US", options);
-  const handleClick = (code) => (event) => {
-    event.preventDefault();
-    props.onItemDelete(code);
+
+  const handleClickDeleteItem = (code) => (event) => {
+    dispatch(delete_item_action(code));
   };
 
   const handleClickSubItem = (code) => (event) => {
-    event.preventDefault();
-    props.onSubItemDelete(code);
+    dispatch(delete_subItem_action(code));
   };
 
   const handleClickAddBundle = (item) => (event) => {
@@ -83,7 +88,7 @@ const Item = (props) => {
           <Button
             color="secondary"
             variant="contained"
-            onClick={handleClick(item.code)}
+            onClick={handleClickDeleteItem(item.code)}
           >
             Delete
           </Button>

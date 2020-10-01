@@ -3,9 +3,12 @@ import Card from "@material-ui/core/Card";
 import Message from "../Commons/Message";
 import Item from "../Item";
 import { useData } from "../../Context/DataContext";
+import { useSelector } from "react-redux";
 
 function ItemsList(props) {
-  const { items, deleteItem, deleteSubItem } = useData();
+  const items = useSelector((state) => state.dataItems.items);
+  console.log("En componente ", items);
+  //const { items, deleteItem, deleteSubItem } = useData();
   return (
     <div>
       {items.length === 0 && (
@@ -21,8 +24,8 @@ function ItemsList(props) {
         >
           <Item
             item={item}
-            onItemDelete={deleteItem}
-            onSubItemDelete={deleteSubItem}
+            //onItemDelete={deleteItem}
+            //onSubItemDelete={deleteSubItem}
             onAddItemToBundle={props.onAddItemToBundle}
             action={props.action}
           ></Item>

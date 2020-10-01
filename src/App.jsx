@@ -6,7 +6,10 @@ import CreateBundle from "./Views/CreateBundle";
 import ReleasedBundle from "./Views/ReleasedBundle";
 import { Container } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { DataProvider } from "./Context/DataContext";
+//import { DataProvider } from "./Context/DataContext";
+import store from "./Redux/store";
+
+import { Provider } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -17,13 +20,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default () => (
-  <DataProvider>
+  <Provider store={store}>
     <App></App>
-  </DataProvider>
+  </Provider>
 );
 
 function App() {
   const classes = useStyles();
+  console.log(store.getState());
   return (
     <div>
       <Router>

@@ -12,7 +12,8 @@ import {
 } from "@material-ui/core";
 import CurrencyInput from "react-currency-input";
 import BootstrapInput from "../Commons/BootstrapInput";
-import { useData } from "../../Context/DataContext";
+import { useDispatch } from "react-redux";
+import { add_item_action } from "../../Redux/Actions/itemsAction";
 
 const useStyles = makeStyles((theme) => ({
   priceInput: {
@@ -47,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormCreateItem = (props) => {
-  const { addItem } = useData();
+  //const { addItem } = useData();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [item, setItem] = useState({
     code: "",
@@ -75,7 +77,8 @@ const FormCreateItem = (props) => {
     item.type = type === "type-single" ? "Simple" : "Multiple";
 
     if (validationForm()) {
-      addItem(item);
+      //addItem(item);
+      dispatch(add_item_action(item));
       setItem({
         code: "",
         description: "",

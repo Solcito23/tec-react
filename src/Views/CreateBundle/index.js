@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateBundle = (props) => {
-  const { acceptBundle } = useData();
+  //const { acceptBundle } = useData();
   const classes = useStyles();
   const options = { style: "currency", currency: "USD" };
   const twoDecimalFormat = new Intl.NumberFormat("en-US", options);
@@ -77,7 +77,7 @@ const CreateBundle = (props) => {
   };
 
   const handleAcceptBundle = () => {
-    acceptBundle(bundle);
+    //acceptBundle(bundle);
     setBundle({
       ...bundle,
       nameBundle: "",
