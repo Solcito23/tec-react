@@ -3,9 +3,8 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
-import BundleItems from "./index";
 import thunk from "redux-thunk";
-import { delete_bundle_action } from "../../Redux/Actions/bundle.action";
+import BundleItems from "./index";
 
 const middlewares = [thunk];
 const mockBundle = {
@@ -32,11 +31,13 @@ const mockBundle = {
 };
 let wrapper;
 
+const mockStore = configureStore(middlewares);
+const store = mockStore(mockBundle);
+const deleteItemIndex = 0;
+
+store.dispatch = jest.fn();
+
 describe("Component BundleItem", () => {
-  const mockStore = configureStore(middlewares);
-  const store = mockStore(mockBundle);
-  store.dispatch = jest.fn();
-  const deleteItemIndex = 0;
   beforeEach(() => {
     wrapper = render(
       <Provider store={store}>
@@ -49,12 +50,12 @@ describe("Component BundleItem", () => {
     cleanup;
   });
 
-  test("search text name", () => {
+  test("should find the name of bundle", () => {
     const { getByTestId } = wrapper;
     expect(getByTestId("data-test-name")).toBeDefined();
   });
 
-  test("delete bundle", () => {
+  test("should dispatch an action on button delete click", () => {
     const { getByTestId, debug } = wrapper;
     const btnDelete = getByTestId("data-test-delete");
     fireEvent.click(btnDelete);

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
@@ -47,9 +47,10 @@ const mockBundle = {
 const onAddItemToBundle = jest.fn();
 let wrapper;
 
+const mockStore = configureStore();
+const store = mockStore(mockBundle);
+
 describe("Component BundleList", () => {
-  const mockStore = configureStore();
-  const store = mockStore(mockBundle);
   beforeEach(() => {
     wrapper = render(
       <Provider store={store}>
@@ -61,12 +62,12 @@ describe("Component BundleList", () => {
     cleanup;
   });
 
-  test("render list of bundles", () => {
+  test("should test BundleList component with list of bundles", () => {
     const { getByTestId } = wrapper;
     expect(getByTestId("data-test-content")).toBeDefined();
   });
 
-  test("render component empty", () => {
+  test("should test BundleList component with default state of empty array", () => {
     const storeEmpty = mockStore(mockBundleEmpty);
     const { getByTestId } = render(
       <Provider store={storeEmpty}>

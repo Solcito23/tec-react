@@ -40,9 +40,10 @@ const mockBundle = {
 const onAddItemToBundle = jest.fn();
 let wrapper;
 
+const mockStore = configureStore();
+const store = mockStore(mockBundle);
+
 describe("Component ItemList", () => {
-  const mockStore = configureStore();
-  const store = mockStore(mockBundle);
   beforeEach(() => {
     wrapper = render(
       <Provider store={store}>
@@ -54,12 +55,12 @@ describe("Component ItemList", () => {
     cleanup;
   });
 
-  test("render content items", () => {
+  test("should test ItemList component with list of items", () => {
     const { getByTestId } = wrapper;
     expect(getByTestId("data-test-content")).toBeDefined();
   });
 
-  test("render component empty", () => {
+  test("should test ItemList component with default state of empty array", () => {
     const storeEmpty = mockStore(mockBundleEmpty);
     const { getByTestId } = render(
       <Provider store={storeEmpty}>

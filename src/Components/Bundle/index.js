@@ -10,12 +10,13 @@ const Bundle = (props) => {
     <div>
       <Grid container id="formCreateBundle">
         <Grid item sm={1}>
-          <FormLabel data-testid="data-test-name">Name:</FormLabel>
+          <FormLabel>Name:</FormLabel>
         </Grid>
         <Grid item sm={11}>
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="name-bundle"
+              data-testid="data-test-name"
               value={bundle.nameBundle}
               onChange={props.handleChangeName("nameBundle")}
               inputProps={{

@@ -51,17 +51,17 @@ describe("Component Bundle", () => {
     cleanup;
   });
 
-  test("search text name", () => {
+  test("should find input for the name of bundle", () => {
     const { getByTestId } = wrapper;
     expect(getByTestId("data-test-name")).toBeDefined();
   });
 
-  test("find button delete", () => {
+  test("should find button for delete item", () => {
     const { findByText } = wrapper;
     expect(findByText("Delete")).toBeDefined();
   });
 
-  test("delete item", () => {
+  test("should dispatch an action on button delete click", () => {
     const { getByText } = wrapper;
     fireEvent.click(getByText("Delete"));
     expect(onDeleteToBundle).toHaveBeenCalledTimes(1);
