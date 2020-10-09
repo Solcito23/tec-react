@@ -10,7 +10,7 @@ const Bundle = (props) => {
     <div>
       <Grid container id="formCreateBundle">
         <Grid item sm={1}>
-          <FormLabel>Name:</FormLabel>
+          <FormLabel data-testid="data-test-name">Name:</FormLabel>
         </Grid>
         <Grid item sm={11}>
           <FormControl fullWidth margen="normal">

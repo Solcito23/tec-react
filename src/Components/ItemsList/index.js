@@ -7,9 +7,9 @@ import { useSelector } from "react-redux";
 function ItemsList(props) {
   const items = useSelector((state) => state.items);
   return (
-    <div>
+    <div data-testid="data-test-content">
       {items.length === 0 && (
-        <div>
+        <div data-testid="data-test-content-message">
           <Message message={"Create new items to view them here :)"} />
         </div>
       )}

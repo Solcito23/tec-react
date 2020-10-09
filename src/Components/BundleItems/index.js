@@ -47,7 +47,7 @@ const BundleItems = (props) => {
     <div className={classes.containerBundle} ref={componentRef}>
       <Grid container>
         <Grid item sm={8}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" data-testid="data-test-name" gutterBottom>
             {bundle.nameBundle}
           </Typography>
         </Grid>
@@ -56,6 +56,7 @@ const BundleItems = (props) => {
           <Button
             color="secondary"
             variant="contained"
+            data-testid="data-test-delete"
             onClick={handleDeleteBundle(props.idx)}
           >
             Delete

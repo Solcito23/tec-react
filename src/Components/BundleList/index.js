@@ -7,9 +7,9 @@ const BundleList = () => {
   const bundles = useSelector((state) => state.bundles);
 
   return (
-    <div>
+    <div data-testid="data-test-content">
       {bundles.length === 0 && (
-        <div>
+        <div data-testid="data-test-content-message">
           <Message
             message={
               "First, try creating a new bundle :). Then, We'll show them here"
