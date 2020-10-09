@@ -66,7 +66,7 @@ describe("Component BundleList", () => {
     expect(getByTestId("data-test-content")).toBeDefined();
   });
 
-  test("render content not bundles", () => {
+  test("render component empty", () => {
     const storeEmpty = mockStore(mockBundleEmpty);
     const { getByTestId } = render(
       <Provider store={storeEmpty}>

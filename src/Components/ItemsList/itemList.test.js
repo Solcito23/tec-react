@@ -59,7 +59,7 @@ describe("Component ItemList", () => {
     expect(getByTestId("data-test-content")).toBeDefined();
   });
 
-  test("render content not items", () => {
+  test("render component empty", () => {
     const storeEmpty = mockStore(mockBundleEmpty);
     const { getByTestId } = render(
       <Provider store={storeEmpty}>

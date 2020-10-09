@@ -56,12 +56,12 @@ describe("Component Bundle", () => {
     expect(getByTestId("data-test-name")).toBeDefined();
   });
 
-  test("render items", () => {
+  test("find button delete", () => {
     const { findByText } = wrapper;
     expect(findByText("Delete")).toBeDefined();
   });
 
-  test("Delete item", () => {
+  test("delete item", () => {
     const { getByText } = wrapper;
     fireEvent.click(getByText("Delete"));
     expect(onDeleteToBundle).toHaveBeenCalledTimes(1);
