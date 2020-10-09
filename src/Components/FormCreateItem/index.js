@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormCreateItem = (props) => {
+const FormCreateItem = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [item, setItem] = useState({
@@ -102,7 +102,7 @@ const FormCreateItem = (props) => {
   };
 
   return (
-    <div className={classes.containerForm}>
+    <div className={classes.containerForm} data-testid="data-test-form-create">
       <Grid container>
         <Grid item sm={2} align="right">
           <FormLabel>Code:</FormLabel>
@@ -115,6 +115,7 @@ const FormCreateItem = (props) => {
               value={item.code}
               error={fieldRequeried.codeError}
               inputProps={{
+                "data-testid": "data-test-code-item",
                 maxLength: 14,
               }}
             ></BootstrapInput>
@@ -133,6 +134,7 @@ const FormCreateItem = (props) => {
               onChange={handleChange("description")}
               error={fieldRequeried.descriptionError}
               value={item.description}
+              inputProps={{"data-testid":"data-test-description-item"}}
               multiline
               rows={3}
             ></BootstrapInput>
@@ -178,6 +180,7 @@ const FormCreateItem = (props) => {
               />
               <FormControlLabel
                 value="type-multiple"
+                data-testid="data-test-type-multiple"
                 name="type"
                 control={<Radio color="primary" />}
                 label="Multiple"
@@ -210,6 +213,7 @@ const FormCreateItem = (props) => {
         <Grid item sm={2}></Grid>
         <Grid item align="right">
           <Button
+            data-testid="data-test-btnCreateItem"
             color="primary"
             variant="contained"
             className={classes.btnCreateItem}
