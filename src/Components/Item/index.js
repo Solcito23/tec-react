@@ -47,6 +47,7 @@ const Item = (props) => {
           action={
             props.action === "createItem" && (
               <Button
+                data-testid="test-id-delete-subitem"
                 color="secondary"
                 variant="contained"
                 onClick={handleClickSubItem(item.code)}
@@ -86,6 +87,7 @@ const Item = (props) => {
       case "createItem":
         return (
           <Button
+            data-testid="test-id-delete-item"
             color="secondary"
             variant="contained"
             onClick={handleClickDeleteItem(item.code)}
@@ -164,7 +166,7 @@ const Item = (props) => {
   };
 
   return (
-    <div>
+    <div data-testid="data-content-item">
       <CardHeader
         action={renderButton(props.action, item)}
         title={
