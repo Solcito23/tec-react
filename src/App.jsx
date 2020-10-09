@@ -28,7 +28,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div data-testid="container-main">
       <Router>
         <Header />
 
