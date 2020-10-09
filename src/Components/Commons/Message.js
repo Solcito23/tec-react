@@ -16,7 +16,7 @@ const Message = (props) => {
   const { message } = props;
   const classes = useStyles();
   return (
-    <div>
+    <div data-testid="data-test-message">
       <Alert className={classes.containerMessage} icon={false} severity="info">
         <Typography variant="subtitle1">{message}</Typography>
       </Alert>

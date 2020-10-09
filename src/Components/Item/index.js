@@ -100,6 +100,7 @@ const Item = (props) => {
           <Button
             color="secondary"
             variant="contained"
+            data-testid="data-test-btnDeleteToBundle"
             onClick={handleClickDeleteToBundle(item.code)}
           >
             Delete
@@ -140,13 +141,18 @@ const Item = (props) => {
                   value={item.totalItem}
                   onChange={props.handleChangeTotal(item.code, typeItem)}
                   inputProps={{
+                    "data-testid": "data-test-multiple-price",
                     min: 1,
                   }}
                 ></BootstrapInput>
               </FormControl>
             </Grid>
             <Grid item sm={2}>
-              <Typography variant="body1" color="textSecondary">
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                data-testid="data-test-priceMultiple"
+              >
                 {twoDecimalFormat.format(item.price * item.totalItem)}
               </Typography>
             </Grid>

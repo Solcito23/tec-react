@@ -16,10 +16,10 @@ const Bundle = (props) => {
           <FormControl fullWidth margen="normal">
             <BootstrapInput
               id="name-bundle"
-              data-testid="data-test-name"
               value={bundle.nameBundle}
               onChange={props.handleChangeName("nameBundle")}
               inputProps={{
+                "data-testid": "data-test-name",
                 maxLength: 14,
               }}
             ></BootstrapInput>

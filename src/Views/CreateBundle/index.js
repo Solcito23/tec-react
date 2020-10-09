@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateBundle = (props) => {
+const CreateBundle = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const options = { style: "currency", currency: "USD" };
@@ -136,7 +136,10 @@ const CreateBundle = (props) => {
   };
 
   return (
-    <div className={classes.containerForm}>
+    <div
+      className={classes.containerForm}
+      data-testid="data-test-content-create-bundle"
+    >
       <Grid container spacing={8}>
         <Grid item xs={7} md={7} lg={7}>
           <Typography variant="h5">Available Items</Typography>
