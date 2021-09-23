@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
 
-    <title>React App</title>
+    <title>App Tec</title>
   </head>
   <body style="background: #80808024">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -34,5 +34,28 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script type="text/javascript">
+      var spartezSupportChat = {
+          portal: 14,
+          cloud: {
+              jiraId: '0b129644-b745-395d-8474-6f4634015dcd',
+              jiraUrl: 'https://engworkers.atlassian.net',
+              urls: {
+                  rest: 'https://chat-api.spartez-software.com',
+                  ws: 'wss://chat-ws.spartez-software.com'
+              },
+          }
+          //meta: [ // optional, custom metadata to store in the issue created from conversation.
+          //    { render: true, name: "Value Name 1", value: val1 }, // "render" values will be displayed in the chat dashboard
+          //    { render: false, name: "Value Name 2", value: val2 },
+          //],
+          // delay: 100, // delay between page load and chat load in milliseconds
+          // container: 'spartez-support-chat-container', // ID of the page element that will be replaced by chat
+          // iconClass: '', // additional class added to the chat icon
+          // chatClass: '', // additional class added to the chat widget
+          // locale: 'en-us' // force a specified locale for displaying texts to the user instead of detecting it from the browser
+      }
+    </script>
+    <script type="text/javascript" src="https://chat-api.spartez-software.com/chat.js"></script>
   </body>
 </html>
